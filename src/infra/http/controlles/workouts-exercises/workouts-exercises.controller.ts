@@ -8,9 +8,9 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreateWorkoutsExerciseDto } from 'src/domain/workouts-exercises/dto/create-workouts-exercise.dto';
-import { UpdateWorkoutsExerciseDto } from 'src/domain/workouts-exercises/dto/update-workouts-exercise.dto';
-import { WorkoutsExercisesService } from 'src/domain/workouts-exercises/service/workouts-exercises.service';
+import { CreateWorkoutsExerciseDto } from '../../../../domain/workouts-exercises/dto/create-workouts-exercise.dto';
+import { UpdateWorkoutsExerciseDto } from '../../../../domain/workouts-exercises/dto/update-workouts-exercise.dto';
+import { WorkoutsExercisesService } from '../../../../domain/workouts-exercises/service/workouts-exercises.service';
 
 @Controller('workouts-exercises')
 export class WorkoutsExercisesController {
@@ -29,8 +29,8 @@ export class WorkoutsExercisesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workoutsExercisesService.findOne(+id);
+  findById(@Param('id') id: string) {
+    return this.workoutsExercisesService.findById(id);
   }
 
   @Patch(':id')
@@ -38,11 +38,11 @@ export class WorkoutsExercisesController {
     @Param('id') id: string,
     @Body() updateWorkoutsExerciseDto: UpdateWorkoutsExerciseDto,
   ) {
-    return this.workoutsExercisesService.update(+id, updateWorkoutsExerciseDto);
+    return this.workoutsExercisesService.update(id, updateWorkoutsExerciseDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.workoutsExercisesService.remove(+id);
+    return this.workoutsExercisesService.remove(id);
   }
 }
