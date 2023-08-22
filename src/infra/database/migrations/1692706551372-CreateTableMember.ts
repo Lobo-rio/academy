@@ -34,7 +34,7 @@ export class CreateTableMember1692706551372 implements MigrationInterface {
                     },
                     {
                         name: "phone",
-                        type: "string",
+                        type: "varchar",
                         length: "12",
                         isNullable: false,
                         default: false,
