@@ -1,27 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
 import { CreateHistoricalTrainingDto } from '../dto/create-historical-training.dto';
 import { UpdateHistoricalTrainingDto } from '../dto/update-historical-training.dto';
+import { IHistoricalTrainingRepository } from '../repository/historical-training-abstract.repository';
 
 @Injectable()
 export class HistoricalTrainingService {
-  create(createHistoricalTrainingDto: CreateHistoricalTrainingDto) {
-    return 'This action adds a new historicalTraining';
+  constructor(
+    @Inject("IHistoricalTrainingRepository")
+    private readonly repository: IHistoricalTrainingRepository
+  ) {}
+
+  async create(createHistoricalTrainingDto: CreateHistoricalTrainingDto) {
+    return await this.repository.create(createHistoricalTrainingDto);
   }
 
-  findAll() {
-    return `This action returns all historicalTraining`;
+  async findAll() {
+    return await this.repository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} historicalTraining`;
+  async findById(id: string) {
+    return await this.repository.findById(id);
   }
 
-  update(id: number, updateHistoricalTrainingDto: UpdateHistoricalTrainingDto) {
-    return `This action updates a #${id} historicalTraining`;
+  async update(id: string, updateHistoricalTrainingDto: UpdateHistoricalTrainingDto) {
+    return await this.repository.update(id, updateHistoricalTrainingDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} historicalTraining`;
+  async remove(id: string) {
+    return await this.repository.remove(id);
   }
 }

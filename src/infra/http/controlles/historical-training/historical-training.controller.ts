@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+
 import { CreateHistoricalTrainingDto } from 'src/domain/historical-training/dto/create-historical-training.dto';
 import { UpdateHistoricalTrainingDto } from 'src/domain/historical-training/dto/update-historical-training.dto';
 import { HistoricalTrainingService } from 'src/domain/historical-training/service/historical-training.service';
@@ -28,8 +29,8 @@ export class HistoricalTrainingController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.historicalTrainingService.findOne(+id);
+  findById(@Param('id') id: string) {
+    return this.historicalTrainingService.findById(id);
   }
 
   @Patch(':id')
@@ -38,13 +39,13 @@ export class HistoricalTrainingController {
     @Body() updateHistoricalTrainingDto: UpdateHistoricalTrainingDto,
   ) {
     return this.historicalTrainingService.update(
-      +id,
+      id,
       updateHistoricalTrainingDto,
     );
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.historicalTrainingService.remove(+id);
+    return this.historicalTrainingService.remove(id);
   }
 }
