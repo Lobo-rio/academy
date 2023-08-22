@@ -1,26 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+
 import { CreateExerciseDto } from '../dto/create-exercise.dto';
 import { UpdateExerciseDto } from '../dto/update-exercise.dto';
+import { IExercisesRepository } from '../repository/exercises-abstract.repository';
 
 @Injectable()
 export class ExercisesService {
-  create(createExerciseDto: CreateExerciseDto) {
-    return 'This action adds a new exercise';
+  constructor(
+    @Inject("IExercisesRepository")
+    private readonly repository: IExercisesRepository
+  ) {}
+
+  async create(createExerciseDto: CreateExerciseDto) {
+    return await this.repository.create(createExerciseDto);
   }
 
-  findAll() {
-    return `This action returns all exercises`;
+  async findAll() {
+    return await this.repository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} exercise`;
+  async findById(id: string) {
+    return await this.repository.findById(id);
   }
 
-  update(id: number, updateExerciseDto: UpdateExerciseDto) {
-    return `This action updates a #${id} exercise`;
+  async update(id: string, updateExerciseDto: UpdateExerciseDto) {
+    return await this.repository.update(id, updateExerciseDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} exercise`;
+  async remove(id: string) {
+    return await this.repository.remove(id);
   }
 }
