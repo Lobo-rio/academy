@@ -19,6 +19,5 @@ import { PaymentsRepository } from '../../infra/database/repositories/payments.r
     },
   ],
   exports: [PaymentsService],
-
 })
 export class PaymentsModule {}

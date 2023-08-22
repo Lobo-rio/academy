@@ -1,26 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+
 import { CreateTrainingDto } from '../dto/create-training.dto';
 import { UpdateTrainingDto } from '../dto/update-training.dto';
+import { ITrainingsRepository } from '../repository/trainings-abstract.repository';
 
 @Injectable()
 export class TrainingService {
-  create(createTrainingDto: CreateTrainingDto) {
-    return 'This action adds a new training';
+  constructor(
+    @Inject("ITrainingsRepository")
+    private readonly repository: ITrainingsRepository
+  ) {}
+
+  async create(createTrainingDto: CreateTrainingDto) {
+    return await this.repository.create(createTrainingDto);
   }
 
-  findAll() {
-    return `This action returns all training`;
+  async findAll() {
+    return await this.repository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} training`;
+  async findById(id: string) {
+    return await this.repository.findById(id);
   }
 
-  update(id: number, updateTrainingDto: UpdateTrainingDto) {
-    return `This action updates a #${id} training`;
+  async update(id: string, updateTrainingDto: UpdateTrainingDto) {
+    return await this.repository.update(id, updateTrainingDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} training`;
+  async remove(id: string) {
+    return await this.repository.remove(id);
   }
 }

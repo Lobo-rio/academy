@@ -8,9 +8,9 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreateTrainingDto } from 'src/domain/training/dto/create-training.dto';
-import { UpdateTrainingDto } from 'src/domain/training/dto/update-training.dto';
-import { TrainingService } from 'src/domain/training/service/training.service';
+import { CreateTrainingDto } from '../../../../domain/training/dto/create-training.dto';
+import { UpdateTrainingDto } from '../../../../domain/training/dto/update-training.dto';
+import { TrainingService } from '../../../../domain/training/service/training.service';
 
 @Controller('training')
 export class TrainingController {
@@ -28,7 +28,7 @@ export class TrainingController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.trainingService.findOne(+id);
+    return this.trainingService.findById(id);
   }
 
   @Patch(':id')
@@ -36,11 +36,11 @@ export class TrainingController {
     @Param('id') id: string,
     @Body() updateTrainingDto: UpdateTrainingDto,
   ) {
-    return this.trainingService.update(+id, updateTrainingDto);
+    return this.trainingService.update(id, updateTrainingDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.trainingService.remove(+id);
+    return this.trainingService.remove(id);
   }
 }
