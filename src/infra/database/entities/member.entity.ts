@@ -17,13 +17,13 @@ export class Member {
     @Column()
     email: string;
 
-    @Column()
+    @Column({ name: 'date-of-birth' })
     dateOfBirth: Date;
 
     @Column()
     phone: string;
 
-    @Column({ name: 'is_active' })
+    @Column({ name: 'is-active' })
     isActive: boolean;
 
     @CreateDateColumn({ name: 'created-at' })

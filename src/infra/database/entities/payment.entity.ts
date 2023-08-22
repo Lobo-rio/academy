@@ -11,14 +11,14 @@ export class Payment {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
-    membro_id: string;
+    @Column({ name: 'member-id' })
+    memberId: string;
 
-    @Column()
+    @Column({ precision: 10.2 })
     valor: number;
 
-    @Column()
-    data_pagamento: Date;
+    @Column({ name: 'data-pagamento' })
+    dataPagamento: Date;
 
     @CreateDateColumn({ name: 'created-at' })
     createdAt: string;

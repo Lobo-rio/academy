@@ -11,11 +11,11 @@ export class WorkoutsExercise {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
+    @Column({ name: 'training-id' })
     trainingId: string;
 
-    @Column()
-    exercisesId: string;
+    @Column({ name: 'exercise-id' })
+    exerciseId: string;
 
     @Column()
     series: number;

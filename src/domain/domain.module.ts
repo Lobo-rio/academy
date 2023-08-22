@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { MembersModule } from './members/members.module';
 import { ExercisesModule } from './exercises/exercises.module';
 import { TrainingModule } from './training/training.module';

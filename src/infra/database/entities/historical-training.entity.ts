@@ -11,13 +11,13 @@ export class HistoricalTraining {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
-    membersId: string;
+    @Column({ name: 'member-id'})
+    memberId: string;
 
-    @Column()
+    @Column({ name: 'training-id' })
     trainingId: string;
 
-    @Column()
+    @Column({ name: 'realization-date'})
     realizationDate: Date;
 
     @CreateDateColumn({ name: 'created-at' })

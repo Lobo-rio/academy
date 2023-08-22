@@ -11,10 +11,10 @@ export class Training {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
-    membersId: string;
+    @Column({ name: 'member-id' })
+    memberId: string;
 
-    @Column()
+    @Column({ name: 'date-training' })
     dateTraining: Date;
 
     @CreateDateColumn({ name: 'created-at' })
