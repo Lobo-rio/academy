@@ -7,9 +7,10 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CreatePaymentDto } from 'src/domain/payments/dto/create-payment.dto';
-import { UpdatePaymentDto } from 'src/domain/payments/dto/update-payment.dto';
-import { PaymentsService } from 'src/domain/payments/service/payments.service';
+
+import { CreatePaymentDto } from '../../../../domain/payments/dto/create-payment.dto';
+import { UpdatePaymentDto } from '../../../../domain/payments/dto/update-payment.dto';
+import { PaymentsService } from '../../../../domain/payments/service/payments.service';
 
 @Controller('payments')
 export class PaymentsController {
@@ -26,17 +27,17 @@ export class PaymentsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paymentsService.findOne(+id);
+  findById(@Param('id') id: string) {
+    return this.paymentsService.findById(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePaymentDto: UpdatePaymentDto) {
-    return this.paymentsService.update(+id, updatePaymentDto);
+    return this.paymentsService.update(id, updatePaymentDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.paymentsService.remove(+id);
+    return this.paymentsService.remove(id);
   }
 }
