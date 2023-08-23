@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common/exceptions';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from 'typeorm';
 
@@ -15,43 +16,58 @@ export class UsersRepository implements IUsersRepository{
   ) {}
 
   async findAll() {
-    return await this.userRepository.find();
+    try {
+      return await this.userRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async findById(id: string) {
-    const user = await this.userRepository.findOne({ where: { id } });
-
-    if (!user) return null;
-
-    return user;
+    try {
+      const user = await this.userRepository.findOne({ where: { id } });
+      if (!user) return null;
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async findByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
-
-    return user;
+    try {
+      const user = await this.userRepository.findOne({ where: { email } });
+      if (!user) return null;
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async create(data: CreateUserDto) {
-    const user = await this.findByEmail(data.email);
-
-    if (user) return null;
-
-    const userNew = this.userRepository.create(data);
-
-    await this.userRepository.save(userNew);
+    try {
+      const userNew = this.userRepository.create(data);
+      await this.userRepository.save(userNew);
+      return userNew;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async update(id: string, data: UpdateUserDto) {
-    const user = await this.findById(id);
-
-    const userUpdate = this.userRepository.merge(user, data);
-
-    await this.userRepository.save(userUpdate);
+    try {
+      const user = await this.findById(id);
+      const userUpdate = this.userRepository.merge(user, data);
+      await this.userRepository.save(userUpdate);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async remove(id: string) {
-    await this.findById(id);
-    await this.userRepository.softDelete(id);
+    try {
+      await this.userRepository.softDelete(id);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 }
