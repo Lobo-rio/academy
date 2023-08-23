@@ -6,8 +6,8 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { hashSync } from "bcryptjs";
-
+import { hashSync } from 'bcryptjs';
+import { v4 as uuid } from 'uuid';
 @Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -36,17 +36,10 @@ export class User {
 
   @BeforeInsert()
   hashPassword() {
-        this.password = hashSync(this.password, 10);
+    this.password = hashSync(this.password, 10);
   }
 
-  constructor(user?: Partial<User>) {
-      this.id = user?.id;
-      this.name = user?.name;
-      this.email = user?.email;
-      this.password = user?.password;
-      this. isActive = user?. isActive;
-      this.isAdmin = user?.isAdmin;
-      this.createdAt = user?.createdAt;
-      this.deletedAt = user?.deletedAt;
+  constructor() {
+    if (!this.id) this.id = uuid();
   }
 }

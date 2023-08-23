@@ -9,9 +9,7 @@ export class CreateTableExercise1692706576810 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
-                        length: "70",
-                        generationStrategy: "uuid",
+                        type: "uuid",
                         isPrimary: true,
                     },
                     {

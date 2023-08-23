@@ -9,15 +9,12 @@ export class CreateTablePayment1692709194050 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
-                        length: "70",
-                        generationStrategy: "uuid",
+                        type: "uuid",
                         isPrimary: true,
                     },
                     {
                         name: "member-id",
-                        type: "varchar",
-                        length: "70",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
@@ -41,8 +38,15 @@ export class CreateTablePayment1692709194050 implements MigrationInterface {
                         isNullable: true,
                     },
                 ],
+                foreignKeys: [
+                    {
+                        name: "fk_payment_member",
+                        columnNames: ["member-id"],
+                        referencedTableName: "members",
+                        referencedColumnNames: ["id"]
+                    }
+                ],
             }),
-            true,
         )
 
         await queryRunner.createIndex(

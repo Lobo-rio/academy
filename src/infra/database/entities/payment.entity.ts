@@ -4,7 +4,12 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     PrimaryGeneratedColumn,
+    ManyToOne,
+    JoinColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
+
+import { Member } from './member.entity';
 
 @Entity({ name: 'payments' })
 export class Payment {
@@ -13,6 +18,10 @@ export class Payment {
 
     @Column({ name: 'member-id' })
     memberId: string;
+
+    @ManyToOne(() => Member)
+    @JoinColumn({ name: "member-id"})
+    member: Member;
 
     @Column({ precision: 10.2 })
     valor: number;
@@ -25,4 +34,8 @@ export class Payment {
 
     @DeleteDateColumn({ name: 'deleted-at' })
     deletedAt: string;
+
+    constructor() {
+        if (!this.id) this.id = uuid();
+    }
 }

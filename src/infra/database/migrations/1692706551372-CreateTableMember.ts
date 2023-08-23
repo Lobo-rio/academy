@@ -9,9 +9,7 @@ export class CreateTableMember1692706551372 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
-                        length: "70",
-                        generationStrategy: "uuid",
+                        type: "uuid",
                         isPrimary: true,
                     },
                     {

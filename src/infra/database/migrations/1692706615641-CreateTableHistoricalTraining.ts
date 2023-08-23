@@ -9,21 +9,17 @@ export class CreateTableHistoricalTraining1692706615641 implements MigrationInte
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
-                        length: "70",
-                        generationStrategy: "uuid",
+                        type: "uuid",
                         isPrimary: true,
                     },
                     {
                         name: "member-id",
-                        type: "varchar",
-                        length: "70",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
                         name: "training-id",
-                        type: "varchar",
-                        length: "70",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
@@ -42,8 +38,21 @@ export class CreateTableHistoricalTraining1692706615641 implements MigrationInte
                         isNullable: true,
                     },
                 ],
+                foreignKeys: [
+                    {
+                        name: "fk_historicalTraining_member",
+                        columnNames: ["member-id"],
+                        referencedTableName: "members",
+                        referencedColumnNames: ["id"]
+                    },
+                    {
+                        name: "fk_historicalTraining_training",
+                        columnNames: ["training-id"],
+                        referencedTableName: "trainings",
+                        referencedColumnNames: ["id"]
+                    }
+                ]
             }),
-            true,
         )
 
         await queryRunner.createIndex(

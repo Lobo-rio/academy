@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table, TableIndex } from "typeorm"
 
-export class CreateTableTraining1692709591044 implements MigrationInterface {
+export class CreateTableTraining1692706615640 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -9,15 +9,12 @@ export class CreateTableTraining1692709591044 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
-                        length: "70",
-                        generationStrategy: "uuid",
+                        type: "uuid",
                         isPrimary: true,
                     },
                     {
                         name: "member-id",
-                        type: "varchar",
-                        length: "70",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
@@ -35,6 +32,14 @@ export class CreateTableTraining1692709591044 implements MigrationInterface {
                         type: "timestamp",
                         isNullable: true,
                     },
+                ],
+                foreignKeys: [
+                    {
+                        name: "fk_training_member",
+                        columnNames: ["member-id"],
+                        referencedTableName: "members",
+                        referencedColumnNames: ["id"]
+                    }
                 ],
             }),
             true,

@@ -5,6 +5,7 @@ import {
     DeleteDateColumn,
     PrimaryGeneratedColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 @Entity({ name: 'members' })
 export class Member {
@@ -31,4 +32,8 @@ export class Member {
 
     @DeleteDateColumn({ name: 'deleted-at' })
     deletedAt: string;
+
+    constructor() {
+        if (!this.id) this.id = uuid();
+    }
 }

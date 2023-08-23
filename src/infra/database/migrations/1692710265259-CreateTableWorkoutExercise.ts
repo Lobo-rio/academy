@@ -9,21 +9,17 @@ export class CreateTableWorkoutExercise1692710265259 implements MigrationInterfa
                 columns: [
                     {
                         name: "id",
-                        type: "varchar",
-                        length: "70",
-                        generationStrategy: "uuid",
+                        type: "uuid",
                         isPrimary: true,
                     },
                     {
                         name: "training-id",
-                        type: "varchar",
-                        length: "70",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
                         name: "exercise-id",
-                        type: "varchar",
-                        length: "70",
+                        type: "uuid",
                         isNullable: false,
                     },
                     {
@@ -45,6 +41,20 @@ export class CreateTableWorkoutExercise1692710265259 implements MigrationInterfa
                         name: "deleted-at",
                         type: "timestamp",
                         isNullable: true,
+                    },
+                ],
+                foreignKeys: [
+                    {
+                        name: "fk_workoutsexercises_training",
+                        columnNames: ["training-id"],
+                        referencedTableName: "trainings",
+                        referencedColumnNames: ["id"]
+                    },
+                    {
+                        name: "fk_workoutsexercises_exercise",
+                        columnNames: ["exercise-id"],
+                        referencedTableName: "exercises",
+                        referencedColumnNames: ["id"]
                     },
                 ],
             }),
