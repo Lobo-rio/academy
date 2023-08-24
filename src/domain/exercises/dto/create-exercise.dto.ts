@@ -9,4 +9,8 @@ export class CreateExerciseDto {
   @ApiProperty()
   @IsNotEmpty()
   description: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  isActive: boolean;
 }

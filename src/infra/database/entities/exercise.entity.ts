@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 
 @Entity({ name: 'exercises' })
 export class Exercise {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     @ApiProperty()
     id: string;
 

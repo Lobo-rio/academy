@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common/exceptions';
 
 import { CreateExerciseDto } from '../dto/create-exercise.dto';
 import { UpdateExerciseDto } from '../dto/update-exercise.dto';
@@ -12,7 +13,11 @@ export class ExercisesService {
   ) {}
 
   async create(createExerciseDto: CreateExerciseDto) {
-    return await this.repository.create(createExerciseDto);
+    const exerciseExisted = await this.repository.findByTitle(createExerciseDto.title);
+    if (exerciseExisted) throw new BadRequestException('Resource existed!', { description: 'There is a registered exercise with this title' });
+
+    const exercise = await this.repository.create(createExerciseDto);
+    return exercise;
   }
 
   async findAll() {
@@ -20,14 +25,18 @@ export class ExercisesService {
   }
 
   async findById(id: string) {
-    return await this.repository.findById(id);
+    const exerciseExisted = await this.repository.findById(id);
+    if (!exerciseExisted) throw new NotFoundException('Resource not found!!', { description: 'There is no registered exercise with this identifier' });
+    return exerciseExisted;
   }
 
   async update(id: string, updateExerciseDto: UpdateExerciseDto) {
-    return await this.repository.update(id, updateExerciseDto);
+    await this.findById(id);
+    await this.repository.update(id, updateExerciseDto);
   }
 
   async remove(id: string) {
-    return await this.repository.remove(id);
+    await this.findById(id);
+    await this.repository.remove(id);
   }
 }
