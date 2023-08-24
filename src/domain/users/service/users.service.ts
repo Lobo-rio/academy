@@ -14,12 +14,10 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = await this.repository.findByEmail(createUserDto.email)
+    const userExisted = await this.repository.findByEmail(createUserDto.email)
+    if (userExisted) throw new BadRequestException('Resource existed!', { description: 'There is a registered user with this email' });
     
-    if (user) throw new BadRequestException('Resource existed!', { description: 'There is a registered user with this email' })
-    
-    await this.repository.create(createUserDto);
-
+    const user = await this.repository.create(createUserDto);
     return user;
   }
 
@@ -29,25 +27,17 @@ export class UsersService {
 
   async findById(id: string): Promise<User> {
     const userExisted = await this.repository.findById(id)
-
-    if (!userExisted) throw new NotFoundException('Resource not found!!', { description: 'There is no registered user with this identifier' })
-
+    if (!userExisted) throw new NotFoundException('Resource not found!!', { description: 'There is no registered user with this identifier' });
     return userExisted;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    const userExisted = await this.repository.findById(id)
-
-    if (!userExisted) throw new NotFoundException('Resource not found!!', { description: 'There is no registered user with this identifier' })
-
-    return await this.repository.update(id, updateUserDto);
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<void> {
+    await this.findById(id)
+    await this.repository.update(id, updateUserDto);
   }
 
-  async remove(id: string) {
-    const userExisted = await this.repository.findById(id)
-
-    if (!userExisted) throw new NotFoundException('Resource not found!!', { description: 'There is no registered user with this identifier' })
-    
-    return await this.repository.remove(id);
+  async remove(id: string): Promise<void> {
+    await this.findById(id)
+    await this.repository.remove(id);
   }
 }

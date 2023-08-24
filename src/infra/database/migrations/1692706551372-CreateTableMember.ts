@@ -41,7 +41,6 @@ export class CreateTableMember1692706551372 implements MigrationInterface {
                         name: "is_active",
                         type: "boolean",
                         isNullable: false,
-                        default: true,
                     },
                     {
                         name: "created-at",

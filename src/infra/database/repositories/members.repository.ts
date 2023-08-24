@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common/exceptions';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from 'typeorm';
 
@@ -15,43 +16,58 @@ export class MembersRepository implements IMembersRepository{
   ) {}
 
   async findAll() {
-    return await this.memberRepository.find();
+    try {
+      return await this.memberRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async findById(id: string) {
-    const member = await this.memberRepository.findOne({ where: { id } });
-
-    if (!member) return null;
-
-    return member;
+    try {
+      const member = await this.memberRepository.findOne({ where: { id } });
+      if (!member) return null;
+      return member;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async findByEmail(email: string) {
-    const member = await this.memberRepository.findOne({ where: { email } });
-
-    return member;
+    try {
+      const member = await this.memberRepository.findOne({ where: { email } });
+      if (!member) return null;
+      return member;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async create(data: CreateMemberDto) {
-    const member = await this.findByEmail(data.email);
-
-    if (member) return null;
-
-    const memberNew = this.memberRepository.create(data);
-
-    await this.memberRepository.save(memberNew);
+    try {
+      const memberNew = this.memberRepository.create(data);
+      await this.memberRepository.save(memberNew);
+      return memberNew;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async update(id: string, data: UpdateMemberDto) {
-    const member = await this.findById(id);
-
-    const memberUpdate = this.memberRepository.merge(member, data);
-
-    await this.memberRepository.save(memberUpdate);
+    try {
+      const member = await this.findById(id);
+      const memberUpdate = this.memberRepository.merge(member, data);
+      await this.memberRepository.save(memberUpdate);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async remove(id: string) {
-    await this.findById(id);
-    await this.memberRepository.softDelete(id);
+    try {
+      await this.memberRepository.softDelete(id);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 }

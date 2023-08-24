@@ -35,13 +35,11 @@ export class CreateTableUsers1692641554814 implements MigrationInterface {
                         name: "is_active",
                         type: "boolean",
                         isNullable: false,
-                        default: true,
                     },
                     {
                         name: "is_admin",
                         type: "boolean",
                         isNullable: false,
-                        default: false,
                     },
                     {
                         name: "created_at",

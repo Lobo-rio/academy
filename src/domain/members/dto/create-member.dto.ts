@@ -21,5 +21,5 @@ export class CreateMemberDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  active: boolean;
+  isActive: boolean;
 }
