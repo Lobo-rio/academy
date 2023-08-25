@@ -21,10 +21,10 @@ export class Training {
 
     @ManyToOne(() => Member)
     @JoinColumn({ name: "member-id"})
-    member: Member;
+    members: Member;
 
-    @Column({ name: 'date-training' })
-    dateTraining: Date;
+    @Column({ name: 'realization-date' })
+    realizationDate: Date;
 
     @CreateDateColumn({ name: 'created-at' })
     createdAt: string;

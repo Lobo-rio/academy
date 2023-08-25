@@ -17,7 +17,11 @@ export class TrainingsRepository implements ITrainingsRepository{
 
   async findAll() {
     try {
-      return await this.trainingRepository.find();
+      return await this.trainingRepository.find({
+        relations: {
+          members: true,
+        },
+      });
     } catch (error) {
       throw new InternalServerErrorException('Internal server error!', { description: error})
     }

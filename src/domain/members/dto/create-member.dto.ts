@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsEmail, IsNotEmpty } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateMemberDto {
   @ApiProperty()
@@ -14,6 +15,7 @@ export class CreateMemberDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   dateOfBirth: Date;
 
   @ApiProperty()

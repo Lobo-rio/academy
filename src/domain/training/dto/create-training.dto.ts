@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty, IsUUID } from 'class-validator';
+import { IsDate, IsISO8601, IsNotEmpty, IsUUID } from 'class-validator';
+import { Type } from 'class-transformer';
 export class CreateTrainingDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsUUID()
-  membersId: string;
+  memberId: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsDate()
-  dateTraining: Date;
+  realizationDate: Date;
 }
