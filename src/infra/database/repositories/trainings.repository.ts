@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common/exceptions';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from 'typeorm';
 
@@ -15,33 +16,48 @@ export class TrainingsRepository implements ITrainingsRepository{
   ) {}
 
   async findAll() {
-    return await this.trainingRepository.find();
+    try {
+      return await this.trainingRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async findById(id: string) {
-    const training = await this.trainingRepository.findOne({ where: { id } });
-
-    if (!training) return null;
-
-    return training;
+    try {
+      const training = await this.trainingRepository.findOne({ where: { id } });
+      if (!training) return null;
+      return training;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async create(data: CreateTrainingDto) {
-    const trainingNew = this.trainingRepository.create(data);
-
-    await this.trainingRepository.save(trainingNew);
+    try {
+      const trainingNew = this.trainingRepository.create(data);
+      const training = await this.trainingRepository.save(trainingNew);
+      return training;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async update(id: string, data: UpdateTrainingDto) {
-    const training = await this.findById(id);
-
-    const trainingUpdate = this.trainingRepository.merge(training, data);
-
-    await this.trainingRepository.save(trainingUpdate);
+    try {
+      const training = await this.findById(id);
+      const trainingUpdate = this.trainingRepository.merge(training, data);
+      await this.trainingRepository.save(trainingUpdate);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 
   async remove(id: string) {
-    await this.findById(id);
-    await this.trainingRepository.softDelete(id);
+    try {
+      await this.trainingRepository.softDelete(id);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error});
+    }
   }
 }

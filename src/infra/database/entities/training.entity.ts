@@ -13,10 +13,10 @@ import { Member } from './member.entity';
 
 @Entity({ name: 'trainings' })
 export class Training {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'member-id' })
+    @Column({ name: 'member-id', type: 'uuid' })
     memberId: string;
 
     @ManyToOne(() => Member)
