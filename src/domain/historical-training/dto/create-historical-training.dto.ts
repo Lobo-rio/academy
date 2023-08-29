@@ -1,16 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty } from 'class-validator';
+import { IsDate, IsNotEmpty, IsUUID } from 'class-validator';
 export class CreateHistoricalTrainingDto {
   @ApiProperty()
   @IsNotEmpty()
-  membersId: string;
+  @IsUUID()
+  memberId: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsUUID()
   trainingId: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsDate()
   realizationDate: Date;
 }

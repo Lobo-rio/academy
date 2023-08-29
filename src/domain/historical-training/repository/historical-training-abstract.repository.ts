@@ -6,8 +6,8 @@ import { UpdateHistoricalTrainingDto } from '../dto/update-historical-training.d
 
 export interface IHistoricalTrainingRepository {
     findAll(): Promise<HistoricalTraining[]>;
-    findById(id: string): Promise<HistoricalTraining | NotFoundException>;
-    create(data: CreateHistoricalTrainingDto): Promise<void | NotFoundException>;
+    findById(id: string): Promise<HistoricalTraining | null>;
+    create(data: CreateHistoricalTrainingDto): Promise<HistoricalTraining | null>;
     update(id: string, data: UpdateHistoricalTrainingDto): Promise<void>;
     remove(id: string): Promise<void>;
 }

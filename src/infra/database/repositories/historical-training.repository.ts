@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common/exceptions';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from 'typeorm';
 
@@ -15,33 +16,59 @@ export class HistoricalTrainingRepository implements IHistoricalTrainingReposito
   ) {}
 
   async findAll() {
-    return await this.historicaltrainingRepository.find();
+    try {
+      return await this.historicaltrainingRepository.find({
+        relations: {
+          member: true,
+          training: true,
+        },
+      });
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
-
   async findById(id: string) {
-    const historicaltraining = await this.historicaltrainingRepository.findOne({ where: { id } });
-
-    if (!historicaltraining) return null;
-
-    return historicaltraining;
+    try {
+      const historicaltraining = await this.historicaltrainingRepository.findOne({ 
+        where: { id },
+        relations: {
+          member: true,
+          training: true,
+        },
+      });
+      if (!historicaltraining) return null;
+      return historicaltraining;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async create(data: CreateHistoricalTrainingDto) {
-    const historicaltrainingNew = this.historicaltrainingRepository.create(data);
-
-    await this.historicaltrainingRepository.save(historicaltrainingNew);
+    try {
+      const historicaltrainingNew = this.historicaltrainingRepository.create(data);
+      await this.historicaltrainingRepository.save(historicaltrainingNew);
+      return historicaltrainingNew;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async update(id: string, data: UpdateHistoricalTrainingDto) {
-    const historicaltraining = await this.findById(id);
-
-    const historicaltrainingUpdate = this.historicaltrainingRepository.merge(historicaltraining, data);
-
-    await this.historicaltrainingRepository.save(historicaltrainingUpdate);
+    try {
+      const historicaltraining = await this.findById(id);
+      const historicaltrainingUpdate = this.historicaltrainingRepository.merge(historicaltraining, data);
+      await this.historicaltrainingRepository.save(historicaltrainingUpdate);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async remove(id: string) {
-    await this.findById(id);
-    await this.historicaltrainingRepository.softDelete(id);
+    try {
+      await this.findById(id);
+      await this.historicaltrainingRepository.softDelete(id);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 }

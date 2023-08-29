@@ -14,17 +14,17 @@ import { Training } from './training.entity';
 
 @Entity({ name: 'historical_training' })
 export class HistoricalTraining {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'member_id'})
+    @Column({ name: 'member_id', type: 'uuid' })
     memberId: string;
 
     @ManyToOne(() => Member)
     @JoinColumn({ name: "member_id"})
     member: Member;
 
-    @Column({ name: 'training_id' })
+    @Column({ name: 'training_id', type: 'uuid' })
     trainingId: string;
 
     @ManyToOne(() => Training)

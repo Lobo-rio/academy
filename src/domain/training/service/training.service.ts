@@ -8,7 +8,6 @@ import { ITrainingsRepository } from '../repository/trainings-abstract.repositor
 import { IMembersRepository } from '../../../domain/members/repository/members-abstract.repository';
 
 import { Training } from '../../../infra/database/entities/training.entity';
-import { Member } from '../../../infra/database/entities/member.entity';
 
 @Injectable()
 export class TrainingService {
