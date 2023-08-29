@@ -22,7 +22,7 @@ export class Member {
     @ApiProperty()
     email: string;
 
-    @Column({ name: 'date-of-birth' })
+    @Column({ name: 'date_of_birth' })
     @ApiProperty()
     dateOfBirth: Date;
 
@@ -34,11 +34,11 @@ export class Member {
     @ApiProperty()
     isActive: boolean;
 
-    @CreateDateColumn({ name: 'created-at' })
+    @CreateDateColumn({ name: 'created_at' })
     @ApiProperty()
     createdAt: string;
 
-    @DeleteDateColumn({ name: 'deleted-at' })
+    @DeleteDateColumn({ name: 'deleted_at' })
     @ApiProperty()
     deletedAt: string;
 

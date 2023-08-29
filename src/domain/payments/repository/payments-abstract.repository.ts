@@ -6,8 +6,8 @@ import { UpdatePaymentDto } from '../dto/update-payment.dto';
 
 export interface IPaymentsRepository {
     findAll(): Promise<Payment[]>;
-    findById(id: string): Promise<Payment | NotFoundException>;
-    create(data: CreatePaymentDto): Promise<void | NotFoundException>;
+    findById(id: string): Promise<Payment | null>;
+    create(data: CreatePaymentDto): Promise<Payment | null>;
     update(id: string, data: UpdatePaymentDto): Promise<void>;
     remove(id: string): Promise<void>;
 }

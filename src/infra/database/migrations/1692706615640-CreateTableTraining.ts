@@ -13,22 +13,22 @@ export class CreateTableTraining1692706615640 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "member-id",
+                        name: "member_id",
                         type: "uuid",
                         isNullable: false,
                     },
                     {
-                        name: "realization-date",
+                        name: "realization_date",
                         type: "date",
                         isNullable: false,
                     },
                     {
-                        name: "created-at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                     {
-                        name: "deleted-at",
+                        name: "deleted_at",
                         type: "timestamp",
                         isNullable: true,
                     },
@@ -36,7 +36,7 @@ export class CreateTableTraining1692706615640 implements MigrationInterface {
                 foreignKeys: [
                     {
                         name: "fk_training_member",
-                        columnNames: ["member-id"],
+                        columnNames: ["member_id"],
                         referencedTableName: "members",
                         referencedColumnNames: ["id"]
                     }

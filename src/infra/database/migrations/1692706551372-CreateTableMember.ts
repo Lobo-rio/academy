@@ -26,7 +26,7 @@ export class CreateTableMember1692706551372 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: "date-of-birth",
+                        name: "date_of_birth",
                         type: "date",
                         isNullable: false,
                     },
@@ -43,12 +43,12 @@ export class CreateTableMember1692706551372 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: "created-at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                     {
-                        name: "deleted-at",
+                        name: "deleted_at",
                         type: "timestamp",
                         isNullable: true,
                     },

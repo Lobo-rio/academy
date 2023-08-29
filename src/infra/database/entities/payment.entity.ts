@@ -13,26 +13,26 @@ import { Member } from './member.entity';
 
 @Entity({ name: 'payments' })
 export class Payment {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'member-id' })
+    @Column({ name: 'member_id' })
     memberId: string;
 
     @ManyToOne(() => Member)
-    @JoinColumn({ name: "member-id"})
+    @JoinColumn({ name: "member_id"})
     member: Member;
 
     @Column({ precision: 10.2 })
-    valor: number;
+    value: number;
 
-    @Column({ name: 'data-pagamento' })
-    dataPagamento: Date;
+    @Column({ name: 'pay_day' })
+    payDay: Date;
 
-    @CreateDateColumn({ name: 'created-at' })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
 
-    @DeleteDateColumn({ name: 'deleted-at' })
+    @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
     constructor() {

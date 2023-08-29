@@ -13,27 +13,27 @@ export class CreateTableHistoricalTraining1692706615641 implements MigrationInte
                         isPrimary: true,
                     },
                     {
-                        name: "member-id",
+                        name: "member_id",
                         type: "uuid",
                         isNullable: false,
                     },
                     {
-                        name: "training-id",
+                        name: "training_id",
                         type: "uuid",
                         isNullable: false,
                     },
                     {
-                        name: "realization-date",
+                        name: "realization_date",
                         type: "date",
                         isNullable: false,
                     },
                     {
-                        name: "created-at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                     {
-                        name: "deleted-at",
+                        name: "deleted_at",
                         type: "timestamp",
                         isNullable: true,
                     },
@@ -41,13 +41,13 @@ export class CreateTableHistoricalTraining1692706615641 implements MigrationInte
                 foreignKeys: [
                     {
                         name: "fk_historicalTraining_member",
-                        columnNames: ["member-id"],
+                        columnNames: ["member_id"],
                         referencedTableName: "members",
                         referencedColumnNames: ["id"]
                     },
                     {
                         name: "fk_historicalTraining_training",
-                        columnNames: ["training-id"],
+                        columnNames: ["training_id"],
                         referencedTableName: "trainings",
                         referencedColumnNames: ["id"]
                     }

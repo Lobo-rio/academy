@@ -32,12 +32,12 @@ export class CreateTableExercise1692706576810 implements MigrationInterface {
                         default: true,
                     },
                     {
-                        name: "created-at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                     {
-                        name: "deleted-at",
+                        name: "deleted_at",
                         type: "timestamp",
                         isNullable: true,
                     },

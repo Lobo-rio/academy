@@ -13,12 +13,12 @@ export class CreateTableWorkoutExercise1692710265259 implements MigrationInterfa
                         isPrimary: true,
                     },
                     {
-                        name: "training-id",
+                        name: "training_id",
                         type: "uuid",
                         isNullable: false,
                     },
                     {
-                        name: "exercise-id",
+                        name: "exercise_id",
                         type: "uuid",
                         isNullable: false,
                     },
@@ -33,12 +33,12 @@ export class CreateTableWorkoutExercise1692710265259 implements MigrationInterfa
                         isNullable: false,
                     },
                     {
-                        name: "created-at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                     {
-                        name: "deleted-at",
+                        name: "deleted_at",
                         type: "timestamp",
                         isNullable: true,
                     },
@@ -46,13 +46,13 @@ export class CreateTableWorkoutExercise1692710265259 implements MigrationInterfa
                 foreignKeys: [
                     {
                         name: "fk_workoutsexercises_training",
-                        columnNames: ["training-id"],
+                        columnNames: ["training_id"],
                         referencedTableName: "trainings",
                         referencedColumnNames: ["id"]
                     },
                     {
                         name: "fk_workoutsexercises_exercise",
-                        columnNames: ["exercise-id"],
+                        columnNames: ["exercise_id"],
                         referencedTableName: "exercises",
                         referencedColumnNames: ["id"]
                     },

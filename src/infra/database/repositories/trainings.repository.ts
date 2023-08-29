@@ -29,7 +29,12 @@ export class TrainingsRepository implements ITrainingsRepository{
 
   async findById(id: string) {
     try {
-      const training = await this.trainingRepository.findOne({ where: { id } });
+      const training = await this.trainingRepository.findOne({ 
+        where: { id },
+        relations: {
+          members: true,
+        },
+      });
       if (!training) return null;
       return training;
     } catch (error) {

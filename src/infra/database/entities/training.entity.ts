@@ -16,20 +16,20 @@ export class Training {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'member-id', type: 'uuid' })
+    @Column({ name: 'member_id', type: 'uuid' })
     memberId: string;
 
     @ManyToOne(() => Member)
-    @JoinColumn({ name: "member-id"})
+    @JoinColumn({ name: "member_id"})
     members: Member;
 
-    @Column({ name: 'realization-date' })
+    @Column({ name: 'realization_date' })
     realizationDate: Date;
 
-    @CreateDateColumn({ name: 'created-at' })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
 
-    @DeleteDateColumn({ name: 'deleted-at' })
+    @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
     constructor() {

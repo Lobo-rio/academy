@@ -26,11 +26,11 @@ export class Exercise {
     @ApiProperty()
     isActive: boolean;
 
-    @CreateDateColumn({ name: 'created-at' })
+    @CreateDateColumn({ name: 'created_at' })
     @ApiProperty()
     createdAt: string;
 
-    @DeleteDateColumn({ name: 'deleted-at' })
+    @DeleteDateColumn({ name: 'deleted_at' })
     @ApiProperty()
     deletedAt: string;
 

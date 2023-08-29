@@ -17,18 +17,18 @@ export class WorkoutsExercise {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({ name: 'training-id' })
+    @Column({ name: 'training_id' })
     trainingId: string;
 
     @ManyToOne(() => Training)
-    @JoinColumn({ name: "training-id"})
+    @JoinColumn({ name: "training_id"})
     training: Training;
 
-    @Column({ name: 'exercise-id' })
+    @Column({ name: 'exercise_id' })
     exerciseId: string;
 
     @ManyToOne(() => Exercise)
-    @JoinColumn({ name: "exercise-id"})
+    @JoinColumn({ name: "exercise_id"})
     exercise: Exercise;
 
     @Column()
@@ -37,10 +37,10 @@ export class WorkoutsExercise {
     @Column()
     repetitions: number;
 
-    @CreateDateColumn({ name: 'created-at' })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
 
-    @DeleteDateColumn({ name: 'deleted-at' })
+    @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
     constructor() {

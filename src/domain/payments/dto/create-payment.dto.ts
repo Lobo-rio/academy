@@ -1,16 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 export class CreatePaymentDto {
     @ApiProperty()
     @IsNotEmpty()
-    membro_id: string;
+    @IsUUID()
+    memberId: string;
 
     @ApiProperty()
     @IsNotEmpty()
-    valor: number;
+    value: number;
 
     @ApiProperty()
     @IsNotEmpty()
-    @IsDate()
-    data_pagamento: Date;
+    payDay: Date;
 }

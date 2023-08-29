@@ -17,27 +17,27 @@ export class HistoricalTraining {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({ name: 'member-id'})
+    @Column({ name: 'member_id'})
     memberId: string;
 
     @ManyToOne(() => Member)
-    @JoinColumn({ name: "member-id"})
+    @JoinColumn({ name: "member_id"})
     member: Member;
 
-    @Column({ name: 'training-id' })
+    @Column({ name: 'training_id' })
     trainingId: string;
 
     @ManyToOne(() => Training)
-    @JoinColumn({ name: "training-id"})
+    @JoinColumn({ name: "training_id"})
     training: Training;
 
-    @Column({ name: 'realization-date'})
+    @Column({ name: 'realization_date'})
     realizationDate: Date;
 
-    @CreateDateColumn({ name: 'created-at' })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
 
-    @DeleteDateColumn({ name: 'deleted-at' })
+    @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
     constructor() {

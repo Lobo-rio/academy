@@ -12,16 +12,14 @@ export class CreateUserDto {
   email: string;
 
   @IsNotEmpty()
-  @Min(5)
-  @Max(15)
   @ApiProperty()
   password: string;
 
   @IsNotEmpty()
   @ApiProperty()
-  active: boolean;
+  isActive: boolean;
 
   @IsNotEmpty()
   @ApiProperty()
-  admin: boolean;
+  isAdmin: boolean;
 }

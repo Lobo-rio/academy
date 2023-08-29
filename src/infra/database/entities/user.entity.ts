@@ -39,7 +39,7 @@ export class User {
   @ApiProperty()
   createdAt: string;
 
-  @DeleteDateColumn({ name: 'deleted-at' })
+  @DeleteDateColumn({ name: 'deleted_at' })
   @ApiProperty()
   deletedAt: string;
 

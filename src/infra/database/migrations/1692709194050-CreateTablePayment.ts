@@ -13,27 +13,27 @@ export class CreateTablePayment1692709194050 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: "member-id",
+                        name: "member_id",
                         type: "uuid",
                         isNullable: false,
                     },
                     {
-                        name: "valor",
+                        name: "value",
                         type: "decimal",
                         isNullable: false,
                     },
                     {
-                        name: "data-pagamento",
+                        name: "pay_day",
                         type: "date",
                         isNullable: false,
                     },
                     {
-                        name: "created-at",
+                        name: "created_at",
                         type: "timestamp",
                         default: "now()",
                     },
                     {
-                        name: "deleted-at",
+                        name: "deleted_at",
                         type: "timestamp",
                         isNullable: true,
                     },
@@ -41,7 +41,7 @@ export class CreateTablePayment1692709194050 implements MigrationInterface {
                 foreignKeys: [
                     {
                         name: "fk_payment_member",
-                        columnNames: ["member-id"],
+                        columnNames: ["member_id"],
                         referencedTableName: "members",
                         referencedColumnNames: ["id"]
                     }
