@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, Min, Max } from 'class-validator';
+import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
+
+import { RegexHelpper } from '../../../helppers/regex';
+import { MessageErrorHelpper } from '../../../helppers/errors';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -13,6 +16,10 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @ApiProperty()
+  @Matches(
+    RegexHelpper.password,
+    { message: MessageErrorHelpper.PASSWORD_VALID }
+  )
   password: string;
 
   @IsNotEmpty()

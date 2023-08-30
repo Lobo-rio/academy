@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsUUID, Matches } from 'class-validator';
+import { RegexHelpper } from '../../../helppers/regex';
 export class CreatePaymentDto {
     @ApiProperty()
     @IsNotEmpty()
@@ -12,5 +13,6 @@ export class CreatePaymentDto {
 
     @ApiProperty()
     @IsNotEmpty()
+    @Matches(RegexHelpper.dateOff)
     payDay: Date;
 }

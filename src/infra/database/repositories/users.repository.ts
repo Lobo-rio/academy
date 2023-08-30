@@ -17,7 +17,9 @@ export class UsersRepository implements IUsersRepository{
 
   async findAll() {
     try {
-      return await this.userRepository.find();
+      return await this.userRepository.find({
+        select: [ 'id', 'name', 'email', 'isActive', 'isAdmin', 'createdAt' ] 
+      });
     } catch (error) {
       throw new InternalServerErrorException('Internal server error!', { description: error})
     }
@@ -25,7 +27,10 @@ export class UsersRepository implements IUsersRepository{
 
   async findById(id: string) {
     try {
-      const user = await this.userRepository.findOne({ where: { id } });
+      const user = await this.userRepository.findOne({ 
+        select: [ 'id', 'name', 'email', 'isActive', 'isAdmin', 'createdAt' ],
+        where: { id } 
+      });
       if (!user) return null;
       return user;
     } catch (error) {
