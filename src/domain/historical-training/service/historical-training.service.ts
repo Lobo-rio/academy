@@ -22,6 +22,7 @@ export class HistoricalTrainingService {
   async create(createHistoricalTrainingDto: CreateHistoricalTrainingDto): Promise<HistoricalTraining> {
     await this.findByMemder(createHistoricalTrainingDto.memberId);
     await this.findByTraining(createHistoricalTrainingDto.trainingId);
+    
     const historicalTraining = await this.repository.create(createHistoricalTrainingDto);
     return historicalTraining;
   }

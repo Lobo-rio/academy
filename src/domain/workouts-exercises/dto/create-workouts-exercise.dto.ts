@@ -1,14 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty } from 'class-validator';
+import { IsInt, IsNotEmpty, IsUUID } from 'class-validator';
 
 export class CreateWorkoutsExerciseDto {
   @ApiProperty()
   @IsNotEmpty()
+  @IsUUID()
   trainingId: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  exercisesId: string;
+  @IsUUID()
+  exerciseId: string;
 
   @ApiProperty()
   @IsNotEmpty()

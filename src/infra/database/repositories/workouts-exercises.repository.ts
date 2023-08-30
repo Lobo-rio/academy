@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
+import { InternalServerErrorException } from '@nestjs/common/exceptions';
 import { Repository } from 'typeorm';
 
 import { IWorkoutsExercisesRepository } from '../../../domain/workouts-exercises/repository/workouts-exercises-abstract.repository';
@@ -16,33 +17,49 @@ export class WorkoutsExercisesRepository implements IWorkoutsExercisesRepository
   ) {}
 
   async findAll() {
-    return await this.workoutsexerciseRepository.find();
+    try {
+      return await this.workoutsexerciseRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async findById(id: string) {
-    const workoutsexercise = await this.workoutsexerciseRepository.findOne({ where: { id } });
-
-    if (!workoutsexercise) return null;
-
-    return workoutsexercise;
+    try { 
+      const workoutsexercise = await this.workoutsexerciseRepository.findOne({ where: { id } });
+      if (!workoutsexercise) return null;
+      return workoutsexercise;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async create(data: CreateWorkoutsExerciseDto) {
-    const workoutsexerciseNew = this.workoutsexerciseRepository.create(data);
-
-    await this.workoutsexerciseRepository.save(workoutsexerciseNew);
+    try {
+      const workoutsexerciseNew = this.workoutsexerciseRepository.create(data);
+      await this.workoutsexerciseRepository.save(workoutsexerciseNew);
+      return workoutsexerciseNew;
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async update(id: string, data: UpdateWorkoutsExerciseDto) {
-    const workoutsexercise = await this.findById(id);
-
-    const workoutsexerciseUpdate = this.workoutsexerciseRepository.merge(workoutsexercise, data);
-
-    await this.workoutsexerciseRepository.save(workoutsexerciseUpdate);
+    try { 
+      const workoutsexercise = await this.findById(id);
+      const workoutsexerciseUpdate = this.workoutsexerciseRepository.merge(workoutsexercise, data);
+      await this.workoutsexerciseRepository.save(workoutsexerciseUpdate);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 
   async remove(id: string) {
-    await this.findById(id);
-    await this.workoutsexerciseRepository.softDelete(id);
+    try {
+      await this.findById(id);
+      await this.workoutsexerciseRepository.softDelete(id);
+    } catch (error) {
+      throw new InternalServerErrorException('Internal server error!', { description: error})
+    }
   }
 }

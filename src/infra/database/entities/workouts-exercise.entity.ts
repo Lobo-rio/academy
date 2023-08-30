@@ -14,17 +14,17 @@ import { Exercise } from './exercise.entity';
 
 @Entity({ name: 'workouts_exercises' })
 export class WorkoutsExercise {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'training_id' })
+    @Column({ name: 'training_id', type: 'uuid' })
     trainingId: string;
 
     @ManyToOne(() => Training)
     @JoinColumn({ name: "training_id"})
     training: Training;
 
-    @Column({ name: 'exercise_id' })
+    @Column({ name: 'exercise_id', type: 'uuid' })
     exerciseId: string;
 
     @ManyToOne(() => Exercise)
