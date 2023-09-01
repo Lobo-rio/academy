@@ -1,10 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { BadRequestException, NotFoundException } from '@nestjs/common/exceptions';
+import { BadRequestException, NotFoundException, UnauthorizedException } from '@nestjs/common/exceptions';
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { IUsersRepository } from '../repository/users-abstract.repository';
 import { User } from '../../../infra/database/entities/user.entity';
+import { MessageErrorHelpper } from '../../../helppers/errors';
 
 @Injectable()
 export class UsersService {
@@ -28,6 +29,12 @@ export class UsersService {
   async findById(id: string): Promise<User> {
     const userExisted = await this.repository.findById(id)
     if (!userExisted) throw new NotFoundException('Resource not found!!', { description: 'There is no registered user with this identifier' });
+    return userExisted;
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    const userExisted = await this.repository.findByEmail(email)
+    if (!userExisted) throw new UnauthorizedException('Resource not found!!', { description: MessageErrorHelpper.PASSWORD_OR_EMAIL_INVALID } );
     return userExisted;
   }
 

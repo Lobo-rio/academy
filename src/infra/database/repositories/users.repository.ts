@@ -40,7 +40,10 @@ export class UsersRepository implements IUsersRepository{
 
   async findByEmail(email: string) {
     try {
-      const user = await this.userRepository.findOne({ where: { email } });
+      const user = await this.userRepository.findOne({ 
+        select: [ 'id', 'name', 'email', 'password' ],
+        where: { email } 
+      });
       if (!user) return null;
       return user;
     } catch (error) {

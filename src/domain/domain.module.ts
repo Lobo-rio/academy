@@ -7,6 +7,7 @@ import { WorkoutsExercisesModule } from './workouts-exercises/workouts-exercises
 import { HistoricalTrainingModule } from './historical-training/historical-training.module';
 import { PaymentsModule } from './payments/payments.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './authenticate/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UsersModule } from './users/users.module';
     HistoricalTrainingModule,
     PaymentsModule,
     UsersModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],

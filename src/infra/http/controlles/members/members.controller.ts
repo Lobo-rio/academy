@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -7,8 +8,9 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateMemberDto } from '../../../../domain/members/dto/create-member.dto';
 import { UpdateMemberDto } from '../../../../domain/members/dto/update-member.dto';
@@ -23,6 +25,8 @@ import { NotFoundExceptionsSwagger } from '../../../../helppers/swagger/errors/n
 
 @Controller('api/members')
 @ApiTags('Members')
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class MembersController {
   constructor(private readonly membersService: MembersService) {}
 

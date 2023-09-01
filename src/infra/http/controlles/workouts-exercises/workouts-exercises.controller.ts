@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -7,8 +8,9 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateWorkoutsExerciseDto } from '../../../../domain/workouts-exercises/dto/create-workouts-exercise.dto';
 import { UpdateWorkoutsExerciseDto } from '../../../../domain/workouts-exercises/dto/update-workouts-exercise.dto';
@@ -22,6 +24,8 @@ import { NotFoundExceptionsSwagger } from 'src/helppers/swagger/errors/not-found
  
 @Controller('api/workouts-exercises')
 @ApiTags('Workouts Exercises')
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class WorkoutsExercisesController {
   constructor(
     private readonly workoutsExercisesService: WorkoutsExercisesService,

@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -7,8 +8,9 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto } from '../../../../domain/users/dto/create-user.dto';
 import { UpdateUserDto } from '../../../../domain/users/dto/update-user.dto';
@@ -48,6 +50,8 @@ export class UsersController {
   }
 
   @Get()
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'List users' })
   @ApiResponse({ 
       status:  200, 
@@ -64,6 +68,8 @@ export class UsersController {
   }
 
   @Get(':id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Return user' })
   @ApiResponse({ 
       status:  200, 
@@ -85,6 +91,8 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Update user' })
   @ApiResponse({ 
       status:  200, 
@@ -105,6 +113,8 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Delete user' })
   @ApiResponse({ 
       status:  200, 

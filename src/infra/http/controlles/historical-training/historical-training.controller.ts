@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -7,8 +8,9 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateHistoricalTrainingDto } from '../../../../domain/historical-training/dto/create-historical-training.dto';
 import { UpdateHistoricalTrainingDto } from '../../../../domain/historical-training/dto/update-historical-training.dto';
@@ -23,6 +25,8 @@ import { FindTodoSwagger } from '../../../../helppers/swagger/response/historica
 
 @Controller('api/historical-training')
 @ApiTags('Historical Training')
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class HistoricalTrainingController {
   constructor(
     private readonly historicalTrainingService: HistoricalTrainingService,

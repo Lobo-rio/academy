@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -7,8 +8,9 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { TrainingService } from '../../../../domain/training/service/training.service';
 
@@ -24,6 +26,8 @@ import { NotFoundExceptionsSwagger } from '../../../../helppers/swagger/errors/n
 
 @Controller('api/trainings')
 @ApiTags('Trainings')
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 

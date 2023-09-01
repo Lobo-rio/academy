@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -7,8 +8,9 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreatePaymentDto } from '../../../../domain/payments/dto/create-payment.dto';
 import { UpdatePaymentDto } from '../../../../domain/payments/dto/update-payment.dto';
@@ -23,6 +25,8 @@ import { NotFoundExceptionsSwagger } from '../../../../helppers/swagger/errors/n
 
 @Controller('api/payments')
 @ApiTags('Payments')
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
